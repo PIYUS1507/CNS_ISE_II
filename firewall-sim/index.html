@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firewall Simulation System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Firewall Simulator</h1>
+        <p>Learn how firewalls protect networks by filtering traffic based on rules.</p>
+    </header>
+
+    <main>
+        <section class="simulation-area">
+            <div class="network-node internet">
+                <h3>Internet</h3>
+                <div class="icon">🌍</div>
+            </div>
+            <div class="simulation-path">
+                <div id="animation-container"></div>
+                <div class="firewall-wall">
+                    <div class="brick-pattern"></div>
+                    <h3>Firewall</h3>
+                </div>
+            </div>
+            <div class="network-node local-net">
+                <h3>Local Network</h3>
+                <div class="icon">💻</div>
+            </div>
+        </section>
+
+        <div class="controls-grid">
+            <section class="panel rule-engine">
+                <h2>Firewall Rules</h2>
+                <div class="table-container">
+                    <table id="rules-table">
+                        <thead>
+                            <tr>
+                                <th>Source IP</th>
+                                <th>Dest IP</th>
+                                <th>Port</th>
+                                <th>Protocol</th>
+                                <th>Action</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="rules-body">
+                            <!-- Rules will be injected here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <form id="add-rule-form" class="add-form">
+                    <input type="text" id="rule-src" placeholder="Src IP (e.g. 1.2.3.4 or *)" required>
+                    <input type="text" id="rule-dst" placeholder="Dst IP (e.g. 192.168.1.10 or *)" required>
+                    <input type="text" id="rule-port" placeholder="Port (e.g. 80 or *)" required>
+                    <select id="rule-proto">
+                        <option value="*">Any</option>
+                        <option value="TCP">TCP</option>
+                        <option value="UDP">UDP</option>
+                        <option value="ICMP">ICMP</option>
+                    </select>
+                    <select id="rule-action">
+                        <option value="ALLOW">ALLOW</option>
+                        <option value="DENY">DENY</option>
+                    </select>
+                    <button type="submit" class="btn-primary">Add Rule</button>
+                </form>
+                <p class="hint">Note: Packets not matching any ALLOW rule will be DENIED by default.</p>
+            </section>
+
+            <div class="right-col">
+                <section class="panel traffic-gen">
+                    <h2>Send Packet</h2>
+                    <form id="send-packet-form" class="add-form grid-2-col">
+                        <input type="text" id="pkt-src" placeholder="Source IP" value="8.8.8.8" required>
+                        <input type="text" id="pkt-dst" placeholder="Dest IP" value="192.168.1.10" required>
+                        <input type="text" id="pkt-port" placeholder="Dest Port" value="80" required>
+                        <select id="pkt-proto">
+                            <option value="TCP">TCP</option>
+                            <option value="UDP">UDP</option>
+                            <option value="ICMP">ICMP</option>
+                        </select>
+                        <button type="submit" class="btn-secondary span-2">Send Packet</button>
+                        <button type="button" id="btn-random" class="btn-outline span-2">Send Random Traffic</button>
+                    </form>
+                </section>
+
+                <section class="panel logs-panel">
+                    <h2>Traffic Logs</h2>
+                    <div class="log-container">
+                        <ul id="log-list">
+                            <!-- Logs will be injected here -->
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
